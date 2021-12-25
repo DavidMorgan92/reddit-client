@@ -6,7 +6,7 @@ A simple Reddit client built with React and utilizing the [Reddit JSON API](http
 
 ### Main page
 
-![Reddit client blockframe (1)](https://user-images.githubusercontent.com/19590575/147276368-6ba76115-7e99-4bf3-be18-4a0a738d92d1.jpeg)
+![Reddit client blockframe](https://user-images.githubusercontent.com/19590575/147276368-6ba76115-7e99-4bf3-be18-4a0a738d92d1.jpeg)
 The main page shows a header at the top which is sticky. The side panel containing the subreddits list is also sticky. The main content is the list of posts which scrolls.
 
 ### Main page (comments expanded)
@@ -16,7 +16,7 @@ When a post is clicked a list of its comments will be loaded and displayed below
 
 ### Mobile (subreddits collapsed)
 
-![Reddit client mobile blockframe (Subreddits collapsed) (1)](https://user-images.githubusercontent.com/19590575/147276538-e2bb119c-27c0-4dd7-9e52-3a006570e11f.jpeg)
+![Reddit client mobile blockframe (Subreddits collapsed)](https://user-images.githubusercontent.com/19590575/147276538-e2bb119c-27c0-4dd7-9e52-3a006570e11f.jpeg)
 On narrow screens the subreddits list will stack above the posts and will show a dropdown button to toggle the display state of the list. Also, padding around the post list and subreddit list will be minimized. The website title will not be visible in the header. The upvotes component will be smaller to consume less space.
 
 ### Mobile (subreddits expanded)
