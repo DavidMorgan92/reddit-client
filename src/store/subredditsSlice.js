@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import reddit from '../api/reddit';
 
 const initialState = {
 	subreddits: [],
@@ -10,8 +11,7 @@ const initialState = {
 export const loadSubreddits = createAsyncThunk(
 	'subreddits/loadSubreddits',
 	async () => {
-		// TODO: fetch subreddits
-		return [];
+		return await reddit.getTopSubreddits();
 	}
 );
 

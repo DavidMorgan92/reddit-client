@@ -4,7 +4,7 @@ import configureStore from 'redux-mock-store';
 import { mount } from 'enzyme';
 import SubredditList from './SubredditList';
 import Subreddit from '../Subreddit/Subreddit';
-import { setSelectedSubreddit } from '../../store/subredditsSlice';
+import { loadSubreddits, setSelectedSubreddit } from '../../store/subredditsSlice';
 
 describe('SubredditList', () => {
 	let subreddits, wrapper, mockStore, store;
@@ -40,7 +40,10 @@ describe('SubredditList', () => {
 
 	it('dispatches setSelectedSubreddit when a <Subreddit /> is clicked', () => {
 		wrapper.find(Subreddit).first().simulate('click');
-		expect(store.dispatch).toHaveBeenCalledTimes(1);
 		expect(store.dispatch).toHaveBeenCalledWith(setSelectedSubreddit(subreddits[0].id));
+	});
+
+	it('dispatches loadSubreddits when mounted', () => {
+		expect(store.dispatch.mock.calls[0][0].toString()).toBe(loadSubreddits().toString());
 	});
 });

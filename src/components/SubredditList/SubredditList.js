@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Subreddit from '../Subreddit/Subreddit';
-import { selectSubreddits, setSelectedSubreddit } from '../../store/subredditsSlice';
+import { loadSubreddits, selectSubreddits, setSelectedSubreddit } from '../../store/subredditsSlice';
 
 function SubredditList() {
 	const dispatch = useDispatch();
@@ -10,6 +10,10 @@ function SubredditList() {
 	const handleSubredditClick = id => {
 		dispatch(setSelectedSubreddit(id));
 	};
+
+	useEffect(() => {
+		dispatch(loadSubreddits());
+	}, [dispatch]);
 
 	return (
 		<aside>
