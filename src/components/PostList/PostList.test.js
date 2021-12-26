@@ -4,7 +4,7 @@ import configureStore from 'redux-mock-store';
 import { mount } from 'enzyme';
 import PostList from './PostList';
 import Post from '../Post/Post';
-import { loadHotPosts } from '../../store/postsSlice';
+import { loadPosts } from '../../store/postsSlice';
 
 describe('PostList', () => {
 	describe('normal network', () => {
@@ -44,8 +44,8 @@ describe('PostList', () => {
 			expect(wrapper.find(Post).length).toEqual(posts.length);
 		});
 
-		it('dispatches loadHotPosts when mounted', () => {
-			expect(store.dispatch.mock.calls[0][0].toString()).toBe(loadHotPosts().toString());
+		it('dispatches loadPosts when mounted', () => {
+			expect(store.dispatch.mock.calls[0][0].toString()).toBe(loadPosts({subredditName: null, searchTerm: null}).toString());
 		});
 	});
 

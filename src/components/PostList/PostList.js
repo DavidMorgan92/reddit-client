@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Post from '../Post/Post';
-import { loadHotPosts, selectFailedToLoadPosts, selectIsLoadingPosts, selectPosts } from '../../store/postsSlice';
+import { loadPosts, selectFailedToLoadPosts, selectIsLoadingPosts, selectPosts } from '../../store/postsSlice';
 
 function PostList() {
 	const dispatch = useDispatch();
@@ -10,7 +10,7 @@ function PostList() {
 	const failedToLoadPosts = useSelector(selectFailedToLoadPosts);
 
 	useEffect(() => {
-		dispatch(loadHotPosts());
+		dispatch(loadPosts({subredditName: null, searchTerm: null}));
 	}, [dispatch]);
 
 	let children = <div className='error-message'>Error occurred getting posts</div>;

@@ -7,17 +7,10 @@ const initialState = {
 	failedToLoadPosts: false,
 };
 
-export const loadPostsBySearchTerm = createAsyncThunk(
-	'posts/loadPostsBySearchTerm',
-	async searchTerm => {
-		return await reddit.getPostsBySearchTerm(searchTerm);
-	}
-);
-
-export const loadHotPosts = createAsyncThunk(
-	'posts/loadHotPosts',
-	async () => {
-		return await reddit.getHotPosts();
+export const loadPosts = createAsyncThunk(
+	'posts/loadPosts',
+	async ({subredditName, searchTerm}) => {
+		return await reddit.getPosts(subredditName, searchTerm);
 	}
 );
 
@@ -47,28 +40,15 @@ const postsSlice = createSlice({
 		},
 	},
 	extraReducers: {
-		[loadPostsBySearchTerm.pending]: state => {
+		[loadPosts.pending]: state => {
 			state.isLoadingPosts = true;
 			state.failedToLoadPosts = false;
 		},
-		[loadPostsBySearchTerm.rejected]: state => {
+		[loadPosts.rejected]: state => {
 			state.isLoadingPosts = false;
 			state.failedToLoadPosts = true;
 		},
-		[loadPostsBySearchTerm.fulfilled]: (state, action) => {
-			state.isLoadingPosts = false;
-			state.failedToLoadPosts = false;
-			state.posts = action.payload;
-		},
-		[loadHotPosts.pending]: state => {
-			state.isLoadingPosts = true;
-			state.failedToLoadPosts = false;
-		},
-		[loadHotPosts.rejected]: state => {
-			state.isLoadingPosts = false;
-			state.failedToLoadPosts = true;
-		},
-		[loadHotPosts.fulfilled]: (state, action) => {
+		[loadPosts.fulfilled]: (state, action) => {
 			state.isLoadingPosts = false;
 			state.failedToLoadPosts = false;
 			state.posts = action.payload;

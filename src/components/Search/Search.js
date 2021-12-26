@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSearchTerm, selectSearchTerm } from '../../store/searchSlice';
-import { loadPostsBySearchTerm } from '../../store/postsSlice';
+import { loadPosts } from '../../store/postsSlice';
 
 function Search() {
 	const dispatch = useDispatch();
@@ -12,7 +12,7 @@ function Search() {
 	};
 
 	const handleSearchClick = () => {
-		dispatch(loadPostsBySearchTerm(term));
+		dispatch(loadPosts({subredditName: null, searchTerm: term}));
 	};
 
 	return (
