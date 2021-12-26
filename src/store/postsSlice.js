@@ -14,6 +14,13 @@ export const loadPostsBySearchTerm = createAsyncThunk(
 	}
 );
 
+export const loadHotPosts = createAsyncThunk(
+	'posts/loadHotPosts',
+	async () => {
+		return await reddit.getHotPosts();
+	}
+);
+
 const postsSlice = createSlice({
 	name: 'posts',
 	initialState,
@@ -49,6 +56,19 @@ const postsSlice = createSlice({
 			state.failedToLoadPosts = true;
 		},
 		[loadPostsBySearchTerm.fulfilled]: (state, action) => {
+			state.isLoadingPosts = false;
+			state.failedToLoadPosts = false;
+			state.posts = action.payload;
+		},
+		[loadHotPosts.pending]: state => {
+			state.isLoadingPosts = true;
+			state.failedToLoadPosts = false;
+		},
+		[loadHotPosts.rejected]: state => {
+			state.isLoadingPosts = false;
+			state.failedToLoadPosts = true;
+		},
+		[loadHotPosts.fulfilled]: (state, action) => {
 			state.isLoadingPosts = false;
 			state.failedToLoadPosts = false;
 			state.posts = action.payload;

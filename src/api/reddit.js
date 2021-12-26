@@ -1,7 +1,22 @@
 const routes = {
 	popularSubreddits: () => 'https://www.reddit.com/subreddits.json',
 	postsBySearchTerm: searchTerm => `https://www.reddit.com/search.json?q=${searchTerm}`,
+	hotPosts: () => 'https://www.reddit.com/hot.json',
 	comments: postId => `https://www.reddit.com/comments/${postId}.json`,
+};
+
+const mapPosts = json => {
+	return json.data.children.map(child => ({
+		id: child.data.id,
+		title: child.data.title,
+		content: '',
+		author: child.data.author,
+		age: '',
+		numComments: child.data.num_comments,
+		upvotes: child.data.score,
+		userUpvoted: false,
+		userDownvoted: false,
+	}));
 };
 
 const reddit = {
@@ -18,17 +33,13 @@ const reddit = {
 	async getPostsBySearchTerm(searchTerm) {
 		const response = await fetch(routes.postsBySearchTerm(searchTerm));
 		const json = await response.json();
-		return json.data.children.map(child => ({
-			id: child.data.id,
-			title: child.data.title,
-			content: '',
-			author: child.data.author,
-			age: '',
-			numComments: child.data.num_comments,
-			upvotes: child.data.score,
-			userUpvoted: false,
-			userDownvoted: false,
-		}));
+		return mapPosts(json);
+	},
+
+	async getHotPosts() {
+		const response = await fetch(routes.hotPosts());
+		const json = await response.json();
+		return mapPosts(json);
 	},
 
 	async getComments(postId) {

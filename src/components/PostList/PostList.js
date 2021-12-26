@@ -1,12 +1,17 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Post from '../Post/Post';
-import { selectFailedToLoadPosts, selectIsLoadingPosts, selectPosts } from '../../store/postsSlice';
+import { loadHotPosts, selectFailedToLoadPosts, selectIsLoadingPosts, selectPosts } from '../../store/postsSlice';
 
 function PostList() {
+	const dispatch = useDispatch();
 	const posts = useSelector(selectPosts);
 	const isLoadingPosts = useSelector(selectIsLoadingPosts);
 	const failedToLoadPosts = useSelector(selectFailedToLoadPosts);
+
+	useEffect(() => {
+		dispatch(loadHotPosts());
+	}, [dispatch]);
 
 	let children = <div className='error-message'>Error occurred getting posts</div>;
 

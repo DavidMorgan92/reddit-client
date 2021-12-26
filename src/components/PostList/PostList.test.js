@@ -4,6 +4,7 @@ import configureStore from 'redux-mock-store';
 import { mount } from 'enzyme';
 import PostList from './PostList';
 import Post from '../Post/Post';
+import { loadHotPosts } from '../../store/postsSlice';
 
 describe('PostList', () => {
 	describe('normal network', () => {
@@ -25,6 +26,8 @@ describe('PostList', () => {
 					failedToLoadPosts: false,
 				},
 			});
+
+			store.dispatch = jest.fn();
 	
 			wrapper = mount(
 				<Provider store={store}>
@@ -40,6 +43,10 @@ describe('PostList', () => {
 		it('renders posts', () => {
 			expect(wrapper.find(Post).length).toEqual(posts.length);
 		});
+
+		it('dispatches loadHotPosts when mounted', () => {
+			expect(store.dispatch.mock.calls[0][0].toString()).toBe(loadHotPosts().toString());
+		});
 	});
 
 	describe('network error', () => {
@@ -54,7 +61,9 @@ describe('PostList', () => {
 					failedToLoadPosts: true,
 				},
 			});
-	
+
+			store.dispatch = jest.fn();
+
 			wrapper = mount(
 				<Provider store={store}>
 					<PostList />
