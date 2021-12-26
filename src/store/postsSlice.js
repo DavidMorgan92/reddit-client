@@ -57,6 +57,8 @@ const postsSlice = createSlice({
 });
 
 export const selectPosts = state => state.posts.posts;
+export const selectIsLoadingPosts = state => state.posts.isLoadingPosts;
+export const selectFailedToLoadPosts = state => state.posts.failedToLoadPosts;
 
 export const { upvote, downvote, cancelUpvote, cancelDownvote } = postsSlice.actions;
 

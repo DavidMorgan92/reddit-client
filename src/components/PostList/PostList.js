@@ -1,18 +1,24 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Post from '../Post/Post';
-import { selectPosts } from '../../store/postsSlice';
+import { selectFailedToLoadPosts, selectIsLoadingPosts, selectPosts } from '../../store/postsSlice';
 
 function PostList() {
 	const posts = useSelector(selectPosts);
+	const isLoadingPosts = useSelector(selectIsLoadingPosts);
+	const failedToLoadPosts = useSelector(selectFailedToLoadPosts);
+
+	let children = <div className='error-message'>Error occurred getting subreddits</div>;
+
+	if (!isLoadingPosts && !failedToLoadPosts) {
+		children = posts.map(post => (
+			<Post key={post.id} post={post} />
+		));
+	}
 
 	return (
 		<main>
-			{
-				posts.map(post => (
-					<Post key={post.id} post={post} />
-				))
-			}
+			{children}
 		</main>
 	);
 }

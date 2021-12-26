@@ -6,35 +6,66 @@ import PostList from './PostList';
 import Post from '../Post/Post';
 
 describe('PostList', () => {
-	let posts, wrapper, mockStore, store;
+	describe('normal network', () => {
+		let posts, wrapper, mockStore, store;
+	
+		beforeEach(() => {
+			mockStore = configureStore([]);
+	
+			posts = [
+				{ id: 'Post1', text: 'Text1' },
+				{ id: 'Post2', text: 'Text2' },
+				{ id: 'Post3', text: 'Text3' },
+			];
+	
+			store = mockStore({
+				posts: {
+					posts,
+				},
+			});
+	
+			wrapper = mount(
+				<Provider store={store}>
+					<PostList />
+				</Provider>
+			);
+		});
+	
+		afterEach(() => {
+			wrapper.unmount();
+		});
+	
+		it('renders posts', () => {
+			expect(wrapper.find(Post).length).toEqual(posts.length);
+		});
+	});
 
-	beforeEach(() => {
-		mockStore = configureStore([]);
+	describe('network error', () => {
+		let wrapper, mockStore, store;
+	
+		beforeEach(() => {
+			mockStore = configureStore([]);
 
-		posts = [
-			{ id: 'Post1', text: 'Text1' },
-			{ id: 'Post2', text: 'Text2' },
-			{ id: 'Post3', text: 'Text3' },
-		];
-
-		store = mockStore({
-			posts: {
-				posts,
-			},
+			store = mockStore({
+				posts: {
+					isLoadingPosts: false,
+					failedToLoadPosts: true,
+				},
+			});
+	
+			wrapper = mount(
+				<Provider store={store}>
+					<PostList />
+				</Provider>
+			);
+		});
+	
+		afterEach(() => {
+			wrapper.unmount();
 		});
 
-		wrapper = mount(
-			<Provider store={store}>
-				<PostList />
-			</Provider>
-		);
-	});
-
-	afterEach(() => {
-		wrapper.unmount();
-	});
-
-	it('renders posts', () => {
-		expect(wrapper.find(Post).length).toEqual(posts.length);
+		it('shows error message', () => {
+			expect(wrapper.exists('.error-message')).toBe(true);
+		});
 	});
 });
