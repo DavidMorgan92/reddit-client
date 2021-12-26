@@ -8,7 +8,7 @@ function PostList() {
 	const isLoadingPosts = useSelector(selectIsLoadingPosts);
 	const failedToLoadPosts = useSelector(selectFailedToLoadPosts);
 
-	let children = <div className='error-message'>Error occurred getting subreddits</div>;
+	let children = <div className='error-message'>Error occurred getting posts</div>;
 
 	if (!isLoadingPosts && !failedToLoadPosts) {
 		children = posts.map(post => (
