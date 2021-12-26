@@ -38,6 +38,10 @@ describe('Post', () => {
 			);
 		});
 
+		afterEach(() => {
+			wrapper.unmount();
+		});
+
 		it('renders the title', () => {
 			expect(wrapper.text().includes(post.title)).toBe(true);
 		});
@@ -116,6 +120,10 @@ describe('Post', () => {
 			);
 		});
 
+		afterEach(() => {
+			wrapper.unmount();
+		});
+
 		it('dispatches cancelUpvote with post ID when upvoted post is upvoted', () => {
 			wrapper.find('button.upvote-button').simulate('click');
 			expect(store.dispatch).toHaveBeenCalledTimes(1);
@@ -152,6 +160,10 @@ describe('Post', () => {
 					<Post post={post} />
 				</Provider>
 			);
+		});
+
+		afterEach(() => {
+			wrapper.unmount();
 		});
 
 		it('dispatches cancelDownvote with post ID when downvoted post is downvoted', () => {

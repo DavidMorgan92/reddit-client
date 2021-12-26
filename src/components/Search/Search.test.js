@@ -29,6 +29,10 @@ describe('Search', () => {
 		);
 	});
 
+	afterEach(() => {
+		wrapper.unmount();
+	});
+
 	it('dispatches setTerm with new term when input changes', () => {
 		const newTerm = 'New term';
 		wrapper.find('input').simulate('change', { target: { value: newTerm } });

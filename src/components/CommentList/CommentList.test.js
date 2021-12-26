@@ -30,6 +30,9 @@ describe('CommentList', () => {
 		);
 	});
 
+	afterEach(() => {
+		wrapper.unmount();
+	});
 
 	it('renders comments', () => {
 		expect(wrapper.find(Comment).length).toEqual(comments.length);

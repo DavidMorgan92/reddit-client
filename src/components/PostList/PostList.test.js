@@ -30,6 +30,10 @@ describe('PostList', () => {
 		);
 	});
 
+	afterEach(() => {
+		wrapper.unmount();
+	});
+
 	it('renders posts', () => {
 		expect(wrapper.find(Post).length).toEqual(posts.length);
 	});
