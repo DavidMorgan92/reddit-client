@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import reddit from '../api/reddit';
 
 const initialState = {
 	posts: [],
@@ -7,10 +8,9 @@ const initialState = {
 };
 
 export const loadPostsBySearchTerm = createAsyncThunk(
-	'posts/loadPosts',
+	'posts/loadPostsBySearchTerm',
 	async searchTerm => {
-		// TODO: fetch posts by search term
-		return [];
+		return await reddit.getPostsBySearchTerm(searchTerm);
 	}
 );
 
