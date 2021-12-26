@@ -43,6 +43,8 @@ const subredditsSlice = createSlice({
 
 export const selectSubreddits = state => state.subreddits.subreddits;
 export const selectSelectedSubreddit = state => state.subreddits.selectedSubreddit;
+export const selectIsLoadingSubreddits = state => state.subreddits.isLoadingSubreddits;
+export const selectFailedToLoadSubreddits = state => state.subreddits.failedToLoadSubreddits;
 
 export const { setSelectedSubreddit } = subredditsSlice.actions;
 
