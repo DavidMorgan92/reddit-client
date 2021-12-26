@@ -21,6 +21,8 @@ describe('CommentList', () => {
 			store = mockStore({
 				comments: {
 					comments,
+					isLoadingComments: false,
+					failedToLoadComments: false,
 				},
 			});
 	

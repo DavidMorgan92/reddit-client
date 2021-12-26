@@ -21,6 +21,8 @@ describe('PostList', () => {
 			store = mockStore({
 				posts: {
 					posts,
+					isLoadingPosts: false,
+					failedToLoadPosts: false,
 				},
 			});
 	
