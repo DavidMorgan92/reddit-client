@@ -6,18 +6,21 @@ import PostList from '../PostList/PostList';
 import SubredditList from '../SubredditList/SubredditList';
 
 describe('App', () => {
+	let wrapper;
+
+	beforeEach(() => {
+		wrapper = shallow(<App />);
+	});
+
 	it('renders a <Header />', () => {
-		const wrapper = shallow(<App />);
 		expect(wrapper.containsMatchingElement(<Header />)).toBe(true);
 	});
 
 	it('renders a <PostList />', () => {
-		const wrapper = shallow(<App />);
 		expect(wrapper.containsMatchingElement(<PostList />)).toBe(true);
 	});
 
 	it('renders a <SubredditList />', () => {
-		const wrapper = shallow(<App />);
 		expect(wrapper.containsMatchingElement(<SubredditList />)).toBe(true);
 	});
 });
