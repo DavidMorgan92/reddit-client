@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import reddit from '../api/reddit';
 
 const initialState = {
 	comments: [],
@@ -9,8 +10,7 @@ const initialState = {
 export const loadComments = createAsyncThunk(
 	'comments/loadComments',
 	async postId => {
-		// TODO: Load comments by post ID
-		return [];
+		return await reddit.getComments(postId);
 	}
 );
 

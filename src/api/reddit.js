@@ -1,6 +1,7 @@
 const routes = {
 	popularSubreddits: () => 'https://www.reddit.com/subreddits.json',
-	postsBySearchTerm: (searchTerm) => `https://www.reddit.com/search.json?q=${searchTerm}`,
+	postsBySearchTerm: searchTerm => `https://www.reddit.com/search.json?q=${searchTerm}`,
+	comments: postId => `https://www.reddit.com/comments/${postId}.json`,
 };
 
 const reddit = {
@@ -27,6 +28,16 @@ const reddit = {
 			upvotes: child.data.score,
 			userUpvoted: false,
 			userDownvoted: false,
+		}));
+	},
+
+	async getComments(postId) {
+		const response = await fetch(routes.comments(postId));
+		const json = await response.json();
+		return json[1].data.children.map(child => ({
+			text: child.data.body,
+			author: child.data.author,
+			age: '',
 		}));
 	},
 };
