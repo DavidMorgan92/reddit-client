@@ -4,7 +4,7 @@ import configureStore from 'redux-mock-store';
 import { mount } from 'enzyme';
 import Post from './Post';
 import { loadComments } from '../../store/commentsSlice';
-import { upvote, downvote, cancelUpvote, cancelDownvote } from '../../store/postsSlice';
+import { upvote, downvote, cancelUpvote, cancelDownvote, setSelectedPost } from '../../store/postsSlice';
 
 describe('Post', () => {
 	describe('non-upvoted and non-downvoted post', () => {
@@ -70,10 +70,16 @@ describe('Post', () => {
 			expect(wrapper.exists('Upvotes')).toBe(true);
 		});
 
+		it('dispatches setSelectedPost with post ID when comments button is clicked', () => {
+			wrapper.find('button.comments-button').simulate('click');
+			expect(store.dispatch).toHaveBeenCalledTimes(2);
+			expect(store.dispatch).toHaveBeenCalledWith(setSelectedPost(post.id));
+		});
+
 		it('dispatches loadComments with post ID when comments button is clicked', () => {
 			wrapper.find('button.comments-button').simulate('click');
-			expect(store.dispatch).toHaveBeenCalledTimes(1);
-			expect(store.dispatch.mock.calls[0][0].toString()).toBe(loadComments(post.id).toString());
+			expect(store.dispatch).toHaveBeenCalledTimes(2);
+			expect(store.dispatch.mock.calls[1][0].toString()).toBe(loadComments(post.id).toString());
 		});
 
 		it('dispatches upvote with post ID when post is upvoted', () => {

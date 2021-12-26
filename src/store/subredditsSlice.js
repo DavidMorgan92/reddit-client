@@ -19,7 +19,7 @@ const subredditsSlice = createSlice({
 	name: 'subreddits',
 	initialState,
 	reducers: {
-		setSelectedSubreddit: (state, action) => {
+		setSelectedSubreddit(state, action) {
 			const selectedSubreddit = state.subreddits.find(s => s.id === action.payload);
 			state.selectedSubreddit = selectedSubreddit;
 		},

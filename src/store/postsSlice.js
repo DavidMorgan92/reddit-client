@@ -3,6 +3,7 @@ import reddit from '../api/reddit';
 
 const initialState = {
 	posts: [],
+	selectedPost: null,
 	isLoadingPosts: false,
 	failedToLoadPosts: false,
 };
@@ -38,6 +39,10 @@ const postsSlice = createSlice({
 			post.userUpvoted = false;
 			post.userDownvoted = false;
 		},
+		setSelectedPost(state, action) {
+			const selectedPost = state.posts.find(p => p.id === action.payload);
+			state.selectedPost = selectedPost;
+		},
 	},
 	extraReducers: {
 		[loadPosts.pending]: state => {
@@ -57,9 +62,10 @@ const postsSlice = createSlice({
 });
 
 export const selectPosts = state => state.posts.posts;
+export const selectSelectedPost = state => state.posts.selectedPost;
 export const selectIsLoadingPosts = state => state.posts.isLoadingPosts;
 export const selectFailedToLoadPosts = state => state.posts.failedToLoadPosts;
 
-export const { upvote, downvote, cancelUpvote, cancelDownvote } = postsSlice.actions;
+export const { upvote, downvote, cancelUpvote, cancelDownvote, setSelectedPost } = postsSlice.actions;
 
 export default postsSlice.reducer;
