@@ -22,7 +22,7 @@ describe('Upvotes', () => {
 				onDownvoteClick={onDownvoteClick}
 			/>
 		);
-	})
+	});
 
 	it('renders the number of upvotes', () => {
 		expect(wrapper.text().includes(post.upvotes)).toBe(true);
