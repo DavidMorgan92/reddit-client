@@ -55,6 +55,7 @@ const reddit = {
 		const response = await fetch(routes.comments(postId));
 		const json = await response.json();
 		return json[1].data.children.map(child => ({
+			id: child.data.id,
 			text: child.data.body,
 			author: child.data.author,
 			age: '',
