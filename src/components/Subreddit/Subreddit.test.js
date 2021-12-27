@@ -29,6 +29,6 @@ describe('Subreddit', () => {
 	it('calls onClick when clicked', () => {
 		wrapper.simulate('click');
 		expect(onClick).toHaveBeenCalledTimes(1);
-		expect(onClick).toHaveBeenCalledWith(subreddit.id);
+		expect(onClick).toHaveBeenCalledWith(subreddit);
 	});
 });

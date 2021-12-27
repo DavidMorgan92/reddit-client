@@ -6,7 +6,7 @@ function Subreddit({
 	onClick,
 }) {
 	const handleSubredditClick = () => {
-		onClick(subreddit.id);
+		onClick(subreddit);
 	};
 
 	return (

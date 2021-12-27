@@ -5,10 +5,11 @@ import { mount } from 'enzyme';
 import SubredditList from './SubredditList';
 import Subreddit from '../Subreddit/Subreddit';
 import { loadSubreddits, setSelectedSubreddit } from '../../store/subredditsSlice';
+import { loadPosts } from '../../store/postsSlice';
 
 describe('SubredditList', () => {
 	describe('normal network', () => {
-		let subreddits, wrapper, mockStore, store;
+		let subreddits, term, wrapper, mockStore, store;
 
 		beforeEach(() => {
 			mockStore = configureStore([]);
@@ -18,6 +19,8 @@ describe('SubredditList', () => {
 				{ id: 'Subreddit2', name: 'Name2' },
 				{ id: 'Subreddit3', name: 'Name3' },
 			];
+
+			term = 'search';
 	
 			store = mockStore({
 				subreddits: {
@@ -25,6 +28,9 @@ describe('SubredditList', () => {
 					selectedSubreddit: null,
 					isLoadingSubreddits: false,
 					failedToLoadSubreddits: false,
+				},
+				search: {
+					term,
 				},
 			});
 	
@@ -49,6 +55,11 @@ describe('SubredditList', () => {
 			wrapper.find(Subreddit).first().simulate('click');
 			expect(store.dispatch).toHaveBeenCalledWith(setSelectedSubreddit(subreddits[0].id));
 		});
+
+		it('dispatches loadPosts when a <Subreddit /> is clicked', () => {
+			wrapper.find(Subreddit).first().simulate('click');
+			expect(store.dispatch.mock.calls[0][0].toString()).toBe(loadPosts({subredditName: subreddits[0].name, searchTerm: term}).toString());
+		});
 	
 		it('dispatches loadSubreddits when mounted', () => {
 			expect(store.dispatch.mock.calls[0][0].toString()).toBe(loadSubreddits().toString());
@@ -56,15 +67,21 @@ describe('SubredditList', () => {
 	});
 
 	describe('network error', () => {
-		let wrapper, mockStore, store;
+		let wrapper, term, mockStore, store;
 
 		beforeEach(() => {
 			mockStore = configureStore([]);
 
+			term = 'search';
+
 			store = mockStore({
 				subreddits: {
+					selectedSubreddit: null,
 					isLoadingSubreddits: false,
 					failedToLoadSubreddits: true,
+				},
+				search: {
+					term,
 				},
 			});
 	
