@@ -7,16 +7,20 @@ import { setSearchTerm } from '../../store/searchSlice';
 import { loadPosts } from '../../store/postsSlice';
 
 describe('Search', () => {
-	let term, wrapper, mockStore, store;
+	let term, selectedSubreddit, wrapper, mockStore, store;
 
 	beforeEach(() => {
 		mockStore = configureStore([]);
 
 		term = 'Search term';
+		selectedSubreddit = { name: 'Subreddit1' };
 
 		store = mockStore({
 			search: {
 				term,
+			},
+			subreddits: {
+				selectedSubreddit,
 			},
 		});
 
@@ -43,6 +47,6 @@ describe('Search', () => {
 	it('dispatches loadPosts when search is clicked', () => {
 		wrapper.find('button').simulate('click');
 		expect(store.dispatch).toHaveBeenCalledTimes(1);
-		expect(store.dispatch.mock.calls[0][0].toString()).toBe(loadPosts({subredditName: null, searchTerm: term}).toString());
+		expect(store.dispatch.mock.calls[0][0].toString()).toBe(loadPosts({subredditName: selectedSubreddit.name, searchTerm: term}).toString());
 	});
 });
