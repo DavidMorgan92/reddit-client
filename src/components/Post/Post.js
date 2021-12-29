@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faComments } from '@fortawesome/free-solid-svg-icons';
+import './Post.css';
 import Upvotes from '../Upvotes/Upvotes';
 import CommentList from '../CommentList/CommentList';
 import { loadComments } from '../../store/commentsSlice';
@@ -30,23 +33,30 @@ function Post({
 	};
 
 	return (
-		<div>
-			{post.title}
-			{post.content}
-			{post.author}
-			{post.age}
-			<button
-				className='comments-button'
-				onClick={handleCommentsClick}
-			>
-				{post.numComments}
-			</button>
-			<Upvotes
-				post={post}
-				onUpvoteClick={handleUpvoteClick}
-				onDownvoteClick={handleDownvoteClick}
-			/>
-			{selectedPost && selectedPost.id === post.id ? <CommentList /> : null}
+		<div className='Post'>
+			<div className='Post__HorizontalFlex'>
+				<Upvotes
+					post={post}
+					onUpvoteClick={handleUpvoteClick}
+					onDownvoteClick={handleDownvoteClick}
+				/>
+				<div className='Post__Main'>
+					<div className='Post__Title'>{post.title}</div>
+					{post.content}
+					<div className='Post__Footer'>
+						{post.author}
+						{post.age}
+						<button
+							className='comments-button'
+							onClick={handleCommentsClick}
+						>
+							<FontAwesomeIcon icon={faComments} />
+							{post.numComments}
+						</button>
+					</div>
+				</div>
+			</div>
+			{selectedPost?.id === post.id ? <CommentList /> : null}
 		</div>
 	);
 }

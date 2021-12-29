@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import './SubredditList.css';
 import Subreddit from '../Subreddit/Subreddit';
-import { loadSubreddits, selectFailedToLoadSubreddits, selectIsLoadingSubreddits, selectSubreddits, setSelectedSubreddit } from '../../store/subredditsSlice';
+import { loadSubreddits, selectFailedToLoadSubreddits, selectIsLoadingSubreddits, selectSelectedSubreddit, selectSubreddits, setSelectedSubreddit } from '../../store/subredditsSlice';
 import { loadPosts } from '../../store/postsSlice';
 import { selectSearchTerm } from '../../store/searchSlice';
 
@@ -11,6 +12,7 @@ function SubredditList() {
 	const isLoadingSubreddits = useSelector(selectIsLoadingSubreddits);
 	const failedToLoadSubreddits = useSelector(selectFailedToLoadSubreddits);
 	const searchTerm = useSelector(selectSearchTerm);
+	const selectedSubreddit = useSelector(selectSelectedSubreddit);
 
 	const handleSubredditClick = subreddit => {
 		dispatch(setSelectedSubreddit(subreddit.id));
@@ -29,12 +31,13 @@ function SubredditList() {
 				key={subreddit.id}
 				subreddit={subreddit}
 				onClick={handleSubredditClick}
+				isSelected={selectedSubreddit?.id === subreddit.id}
 			/>
 		));
 	}
 
 	return (
-		<aside>
+		<aside className='SubredditList'>
 			{children}
 		</aside>
 	);

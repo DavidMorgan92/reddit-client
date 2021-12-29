@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import './Search.css';
 import { setSearchTerm, selectSearchTerm } from '../../store/searchSlice';
 import { loadPosts } from '../../store/postsSlice';
 import { selectSelectedSubreddit } from '../../store/subredditsSlice';
@@ -18,8 +19,8 @@ function Search() {
 	};
 
 	return (
-		<div>
-			<input type="search" value={term} onChange={handleTermChange} />
+		<div className='Search'>
+			<input type='search' value={term} onChange={handleTermChange} />
 			<button onClick={handleSearchClick}>Search</button>
 		</div>
 	);

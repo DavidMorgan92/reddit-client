@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import './Upvotes.css';
 
 function Upvotes({
 	post,
@@ -16,19 +19,19 @@ function Upvotes({
 		downvoteClassName += ' active';
 
 	return (
-		<div>
+		<div className='Upvotes'>
 			<button
 				onClick={onUpvoteClick}
 				className={upvoteClassName}
 			>
-				Upvote
+				<FontAwesomeIcon icon={faArrowUp} />
 			</button>
 			<div>{post.upvotes}</div>
 			<button
 				onClick={onDownvoteClick}
 				className={downvoteClassName}
 			>
-				Downvote
+				<FontAwesomeIcon icon={faArrowDown} />
 			</button>
 		</div>
 	);

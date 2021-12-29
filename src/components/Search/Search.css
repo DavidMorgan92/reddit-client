@@ -1,0 +1,13 @@
+.Search input {
+	border-radius: 20px;
+	padding: 10px;
+	border: none;
+}
+
+.Search button {
+	border-radius: 20px;
+	padding: 10px;
+	margin-left: 10px;
+	border: none;
+	background-color: #e07a5f;
+}
