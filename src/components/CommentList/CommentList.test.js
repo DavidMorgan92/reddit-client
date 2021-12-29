@@ -1,6 +1,8 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { mount } from 'enzyme';
 import CommentList from './CommentList';
 import Comment from '../Comment/Comment';
@@ -68,6 +70,35 @@ describe('CommentList', () => {
 
 		it('shows error message', () => {
 			expect(wrapper.exists('.error-message')).toBe(true);
+		});
+	});
+
+	describe('loading', () => {
+		let wrapper, mockStore, store;
+	
+		beforeEach(() => {
+			mockStore = configureStore([]);
+
+			store = mockStore({
+				comments: {
+					isLoadingComments: true,
+					failedToLoadComments: false,
+				},
+			});
+	
+			wrapper = mount(
+				<Provider store={store}>
+					<CommentList />
+				</Provider>
+			);
+		});
+	
+		afterEach(() => {
+			wrapper.unmount();
+		});
+
+		it('shows spinner icon', () => {
+			expect(wrapper.containsMatchingElement(<FontAwesomeIcon className='CommentList__Spinner' icon={faSpinner} spin />)).toBe(true);
 		});
 	});
 });

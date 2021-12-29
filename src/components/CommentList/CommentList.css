@@ -1,0 +1,9 @@
+.CommentList {
+	text-align: center;
+}
+
+.CommentList__Spinner {
+	color: #3d405b;
+	font-size: 2em;
+	padding: 25px;
+}

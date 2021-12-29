@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import './SubredditList.css';
 import Subreddit from '../Subreddit/Subreddit';
 import { loadSubreddits, selectFailedToLoadSubreddits, selectIsLoadingSubreddits, selectSelectedSubreddit, selectSubreddits, setSelectedSubreddit } from '../../store/subredditsSlice';
@@ -23,17 +25,21 @@ function SubredditList() {
 		dispatch(loadSubreddits());
 	}, [dispatch]);
 
-	let children = <div className='error-message'>Error occurred getting subreddits</div>;
+	let children = <FontAwesomeIcon className='SubredditList__Spinner' icon={faSpinner} spin />;
 
-	if (!isLoadingSubreddits && !failedToLoadSubreddits) {
-		children = subreddits.map(subreddit => (
-			<Subreddit
-				key={subreddit.id}
-				subreddit={subreddit}
-				onClick={handleSubredditClick}
-				isSelected={selectedSubreddit?.id === subreddit.id}
-			/>
-		));
+	if (!isLoadingSubreddits) {
+		if (failedToLoadSubreddits) {
+			children = <div className='error-message'>Error occurred getting subreddits</div>;
+		} else {
+			children = subreddits.map(subreddit => (
+				<Subreddit
+					key={subreddit.id}
+					subreddit={subreddit}
+					onClick={handleSubredditClick}
+					isSelected={selectedSubreddit?.id === subreddit.id}
+				/>
+			));
+		}
 	}
 
 	return (

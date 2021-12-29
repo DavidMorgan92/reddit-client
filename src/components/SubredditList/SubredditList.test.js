@@ -2,6 +2,8 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { mount } from 'enzyme';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import SubredditList from './SubredditList';
 import Subreddit from '../Subreddit/Subreddit';
 import { loadSubreddits, setSelectedSubreddit } from '../../store/subredditsSlice';
@@ -100,6 +102,43 @@ describe('SubredditList', () => {
 
 		it('shows error message', () => {
 			expect(wrapper.exists('.error-message')).toBe(true);
+		});
+	});
+
+	describe('loading', () => {
+		let wrapper, term, mockStore, store;
+
+		beforeEach(() => {
+			mockStore = configureStore([]);
+
+			term = 'search';
+
+			store = mockStore({
+				subreddits: {
+					selectedSubreddit: null,
+					isLoadingSubreddits: true,
+					failedToLoadSubreddits: false,
+				},
+				search: {
+					term,
+				},
+			});
+	
+			store.dispatch = jest.fn();
+	
+			wrapper = mount(
+				<Provider store={store}>
+					<SubredditList />
+				</Provider>
+			);
+		});
+
+		afterEach(() => {
+			wrapper.unmount();
+		});
+
+		it('shows spinner icon', () => {
+			expect(wrapper.containsMatchingElement(<FontAwesomeIcon className='SubredditList__Spinner' icon={faSpinner} spin />)).toBe(true);
 		});
 	});
 });
