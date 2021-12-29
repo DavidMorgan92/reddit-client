@@ -1,4 +1,5 @@
 .App__Main {
 	display: flex;
 	padding: 0 20px;
+	align-items: flex-start;
 }
