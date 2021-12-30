@@ -10,4 +10,8 @@
 .Comment__Footer {
 	display: flex;
 	justify-content: space-between;
+	font-size: small;
+	font-weight: bold;
+	font-style: italic;
+	margin-top: 0.5em;
 }
