@@ -9,8 +9,8 @@ function Upvotes({
 	onUpvoteClick,
 	onDownvoteClick,
 }) {
-	let upvoteClassName = 'upvote-button';
-	let downvoteClassName = 'downvote-button';
+	let upvoteClassName = 'Upvotes__UpvoteButton';
+	let downvoteClassName = 'Upvotes__DownvoteButton';
 
 	if (post.userUpvoted)
 		upvoteClassName += ' active';

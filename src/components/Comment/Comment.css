@@ -6,3 +6,8 @@
 	text-align: initial;
 	word-break: break-all;
 }
+
+.Comment__Footer {
+	display: flex;
+	justify-content: space-between;
+}

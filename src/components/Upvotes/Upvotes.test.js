@@ -29,20 +29,20 @@ describe('Upvotes', () => {
 	});
 
 	it('renders an upvote button', () => {
-		expect(wrapper.exists('button.upvote-button')).toBe(true);
+		expect(wrapper.exists('.Upvotes__UpvoteButton')).toBe(true);
 	});
 
 	it('renders a downvote button', () => {
-		expect(wrapper.exists('button.downvote-button')).toBe(true);
+		expect(wrapper.exists('.Upvotes__DownvoteButton')).toBe(true);
 	});
 
 	it('calls onUpvoteClick when the upvote button is clicked', () => {
-		wrapper.find('button.upvote-button').simulate('click');
+		wrapper.find('.Upvotes__UpvoteButton').simulate('click');
 		expect(onUpvoteClick).toHaveBeenCalledTimes(1);
 	});
 
 	it('calls onDownvoteClick when the downvote button is clicked', () => {
-		wrapper.find('button.downvote-button').simulate('click');
+		wrapper.find('.Upvotes__DownvoteButton').simulate('click');
 		expect(onDownvoteClick).toHaveBeenCalledTimes(1);
 	});
 });

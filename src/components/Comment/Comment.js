@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import './Comment.css';
 
 function Comment({
@@ -8,8 +9,10 @@ function Comment({
 	return (
 		<div className='Comment'>
 			{comment.text}
-			{comment.author}
-			{comment.age}
+			<div className='Comment__Footer'>
+				<span>{comment.author}</span>
+				<span>{moment.unix(comment.created).fromNow()}</span>
+			</div>
 		</div>
 	);
 }

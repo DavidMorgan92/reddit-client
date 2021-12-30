@@ -2,6 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { mount } from 'enzyme';
+import moment from 'moment';
 import Post from './Post';
 import { loadComments } from '../../store/commentsSlice';
 import { upvote, downvote, cancelUpvote, cancelDownvote, setSelectedPost } from '../../store/postsSlice';
@@ -18,7 +19,7 @@ describe('Post', () => {
 				title: 'Title',
 				content: 'Content',
 				author: 'Author',
-				age: '1 year',
+				created: new Date(),
 				numComments: 256,
 				upvotes: 100,
 				userUpvoted: false,
@@ -55,7 +56,7 @@ describe('Post', () => {
 		});
 
 		it('renders the age', () => {
-			expect(wrapper.text().includes(post.age)).toBe(true);
+			expect(wrapper.text().includes(moment.unix(post.created).fromNow())).toBe(true);
 		});
 
 		it('renders the number of comments', () => {
@@ -63,7 +64,7 @@ describe('Post', () => {
 		});
 
 		it('renders a comments button', () => {
-			expect(wrapper.exists('button.comments-button')).toBe(true);
+			expect(wrapper.exists('.Post__CommentsButton')).toBe(true);
 		})
 
 		it('renders an <Upvotes />', () => {
@@ -71,25 +72,25 @@ describe('Post', () => {
 		});
 
 		it('dispatches setSelectedPost with post ID when comments button is clicked', () => {
-			wrapper.find('button.comments-button').simulate('click');
+			wrapper.find('.Post__CommentsButton').simulate('click');
 			expect(store.dispatch).toHaveBeenCalledTimes(2);
 			expect(store.dispatch).toHaveBeenCalledWith(setSelectedPost(post.id));
 		});
 
 		it('dispatches loadComments with post ID when comments button is clicked', () => {
-			wrapper.find('button.comments-button').simulate('click');
+			wrapper.find('.Post__CommentsButton').simulate('click');
 			expect(store.dispatch).toHaveBeenCalledTimes(2);
 			expect(store.dispatch.mock.calls[1][0].toString()).toBe(loadComments(post.id).toString());
 		});
 
 		it('dispatches upvote with post ID when post is upvoted', () => {
-			wrapper.find('button.upvote-button').simulate('click');
+			wrapper.find('.Upvotes__UpvoteButton').simulate('click');
 			expect(store.dispatch).toHaveBeenCalledTimes(1);
 			expect(store.dispatch).toHaveBeenCalledWith(upvote(post.id));
 		});
 
 		it('dispatches downvote with post ID when post is downvoted', () => {
-			wrapper.find('button.downvote-button').simulate('click');
+			wrapper.find('.Upvotes__DownvoteButton').simulate('click');
 			expect(store.dispatch).toHaveBeenCalledTimes(1);
 			expect(store.dispatch).toHaveBeenCalledWith(downvote(post.id));
 		});
@@ -106,7 +107,7 @@ describe('Post', () => {
 				title: 'Title',
 				content: 'Content',
 				author: 'Author',
-				age: '1 year',
+				created: new Date(),
 				numComments: 256,
 				upvotes: 100,
 				userUpvoted: true,
@@ -131,7 +132,7 @@ describe('Post', () => {
 		});
 
 		it('dispatches cancelUpvote with post ID when upvoted post is upvoted', () => {
-			wrapper.find('button.upvote-button').simulate('click');
+			wrapper.find('.Upvotes__UpvoteButton').simulate('click');
 			expect(store.dispatch).toHaveBeenCalledTimes(1);
 			expect(store.dispatch).toHaveBeenCalledWith(cancelUpvote(post.id));
 		});
@@ -148,7 +149,7 @@ describe('Post', () => {
 				title: 'Title',
 				content: 'Content',
 				author: 'Author',
-				age: '1 year',
+				created: new Date(),
 				numComments: 256,
 				upvotes: 100,
 				userUpvoted: false,
@@ -173,7 +174,7 @@ describe('Post', () => {
 		});
 
 		it('dispatches cancelDownvote with post ID when downvoted post is downvoted', () => {
-			wrapper.find('button.downvote-button').simulate('click');
+			wrapper.find('.Upvotes__DownvoteButton').simulate('click');
 			expect(store.dispatch).toHaveBeenCalledTimes(1);
 			expect(store.dispatch).toHaveBeenCalledWith(cancelDownvote(post.id));
 		});

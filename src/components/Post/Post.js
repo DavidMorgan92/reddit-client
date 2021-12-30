@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
+import moment from 'moment';
 import './Post.css';
 import Upvotes from '../Upvotes/Upvotes';
 import CommentList from '../CommentList/CommentList';
@@ -44,10 +45,10 @@ function Post({
 					<div className='Post__Title'>{post.title}</div>
 					{post.content}
 					<div className='Post__Footer'>
-						{post.author}
-						{post.age}
+						<span>{post.author}</span>
+						<span>{moment.unix(post.created).fromNow()}</span>
 						<button
-							className='comments-button'
+							className='Post__CommentsButton'
 							onClick={handleCommentsClick}
 						>
 							<FontAwesomeIcon icon={faComments} />

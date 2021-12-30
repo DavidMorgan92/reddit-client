@@ -28,7 +28,8 @@ const reddit = {
 	async getTopSubreddits() {
 		const response = await fetch(routes.popularSubreddits());
 		const json = await response.json();
-		return json.data.children.map(child => ({
+		const subreddits = json.data.children.filter(child => child.kind === 't5');
+		return subreddits.map(child => ({
 			id: child.data.id,
 			icon: child.data.icon_img,
 			name: child.data.display_name,
@@ -38,12 +39,13 @@ const reddit = {
 	async getPosts(subredditName, searchTerm) {
 		const response = await fetch(routes.posts(subredditName, searchTerm));
 		const json = await response.json();
-		return json.data.children.map(child => ({
+		const posts = json.data.children.filter(child => child.kind === 't3');
+		return posts.map(child => ({
 			id: child.data.id,
 			title: child.data.title,
 			content: '',
 			author: child.data.author,
-			age: '',
+			created: child.data.created_utc,
 			numComments: child.data.num_comments,
 			upvotes: child.data.score,
 			userUpvoted: false,
@@ -54,11 +56,12 @@ const reddit = {
 	async getComments(postId) {
 		const response = await fetch(routes.comments(postId));
 		const json = await response.json();
-		return json[1].data.children.map(child => ({
+		const comments = json[1].data.children.filter(child => child.kind === 't1');
+		return comments.map(child => ({
 			id: child.data.id,
 			text: child.data.body,
 			author: child.data.author,
-			age: '',
+			created: child.data.created_utc,
 		}));
 	},
 };

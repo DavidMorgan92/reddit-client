@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import moment from 'moment';
 import Comment from './Comment';
 
 describe('Comment', () => {
@@ -9,7 +10,7 @@ describe('Comment', () => {
 		comment = {
 			text: 'Text',
 			author: 'Author',
-			age: 'Age',
+			created: new Date(),
 		};
 
 		wrapper = shallow(<Comment comment={comment} />);
@@ -24,6 +25,6 @@ describe('Comment', () => {
 	});
 
 	it('renders the age', () => {
-		expect(wrapper.text().includes(comment.age)).toBe(true);
+		expect(wrapper.text().includes(moment.unix(comment.created).fromNow())).toBe(true);
 	});
 });
