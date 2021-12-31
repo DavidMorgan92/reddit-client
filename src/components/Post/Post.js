@@ -9,6 +9,7 @@ import Upvotes from '../Upvotes/Upvotes';
 import CommentList from '../CommentList/CommentList';
 import { loadComments } from '../../store/commentsSlice';
 import { upvote, downvote, cancelUpvote, cancelDownvote, setSelectedPost, selectSelectedPost } from '../../store/postsSlice';
+import shortenNumber from '../../util/shortenNumber';
 
 function Post({
 	post
@@ -52,7 +53,7 @@ function Post({
 							onClick={handleCommentsClick}
 						>
 							<FontAwesomeIcon icon={faComments} />
-							{post.numComments}
+							{shortenNumber(post.numComments, 1)}
 						</button>
 					</div>
 				</div>

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import './Upvotes.css';
+import shortenNumber from '../../util/shortenNumber';
 
 function Upvotes({
 	post,
@@ -26,7 +27,7 @@ function Upvotes({
 			>
 				<FontAwesomeIcon icon={faArrowUp} />
 			</button>
-			<div>{post.upvotes}</div>
+			<div>{shortenNumber(post.upvotes, 1)}</div>
 			<button
 				onClick={onDownvoteClick}
 				className={downvoteClassName}
