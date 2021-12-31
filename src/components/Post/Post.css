@@ -26,6 +26,8 @@
 	grid-template-columns: repeat(3, 1fr);
 	column-gap: 5px;
 	font-size: small;
+	font-weight: bold;
+	font-style: italic;
 }
 
 .Post__Age {
