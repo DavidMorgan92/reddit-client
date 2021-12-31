@@ -4,6 +4,7 @@ import App from './App';
 import Header from '../Header/Header';
 import PostList from '../PostList/PostList';
 import SubredditList from '../SubredditList/SubredditList';
+import Footer from '../Footer/Footer';
 
 describe('App', () => {
 	let wrapper;
@@ -22,5 +23,9 @@ describe('App', () => {
 
 	it('renders a <SubredditList />', () => {
 		expect(wrapper.containsMatchingElement(<SubredditList />)).toBe(true);
+	});
+
+	it('renders a <Footer />', () => {
+		expect(wrapper.containsMatchingElement(<Footer />)).toBe(true);
 	});
 });

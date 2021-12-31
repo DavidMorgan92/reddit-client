@@ -29,9 +29,9 @@ function PostList() {
 	}
 
 	return (
-		<main>
+		<div className='PostList'>
 			{children}
-		</main>
+		</div>
 	);
 }
 

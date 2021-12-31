@@ -43,9 +43,9 @@ function SubredditList() {
 	}
 
 	return (
-		<aside className='SubredditList'>
+		<div className='SubredditList'>
 			{children}
-		</aside>
+		</div>
 	);
 }
 

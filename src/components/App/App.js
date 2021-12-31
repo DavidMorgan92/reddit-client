@@ -5,8 +5,7 @@ import store from '../../store/store';
 import Header from '../Header/Header';
 import PostList from '../PostList/PostList';
 import SubredditList from '../SubredditList/SubredditList';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import Footer from '../Footer/Footer';
 
 function App() {
 	return (
@@ -16,15 +15,7 @@ function App() {
 				<PostList />
 				<SubredditList />
 			</div>
-			<footer>
-				<small>
-					Reddit icon provided by&nbsp;
-					<a href='https://iconscout.com/contributors/pocike' target='_blank' rel='noopener noreferrer'>
-						"Those Icons"&nbsp;
-						<sup><FontAwesomeIcon icon={faExternalLinkAlt} /></sup>
-					</a>
-				</small>
-			</footer>
+			<Footer />
 		</Provider>
 	);
 }

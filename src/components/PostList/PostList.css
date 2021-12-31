@@ -1,10 +1,10 @@
+.PostList {
+	width: 100%;
+	text-align: center;
+}
+
 .PostList__Spinner {
 	color: #f4f1de;
 	font-size: 4em;
 	padding: 50px;
-}
-
-main {
-	width: 100%;
-	text-align: center;
 }
