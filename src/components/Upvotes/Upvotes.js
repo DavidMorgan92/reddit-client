@@ -12,12 +12,17 @@ function Upvotes({
 }) {
 	let upvoteClassName = 'Upvotes__UpvoteButton';
 	let downvoteClassName = 'Upvotes__DownvoteButton';
+	let upvotes = post.upvotes;
 
-	if (post.userUpvoted)
+	if (post.userUpvoted) {
 		upvoteClassName += ' active';
+		++upvotes;
+	}
 
-	if (post.userDownvoted)
+	if (post.userDownvoted) {
 		downvoteClassName += ' active';
+		--upvotes;
+	}
 
 	return (
 		<div className='Upvotes'>
@@ -27,7 +32,7 @@ function Upvotes({
 			>
 				<FontAwesomeIcon icon={faArrowUp} />
 			</button>
-			<div>{shortenNumber(post.upvotes, 1)}</div>
+			<div>{shortenNumber(upvotes, 1)}</div>
 			<button
 				onClick={onDownvoteClick}
 				className={downvoteClassName}
