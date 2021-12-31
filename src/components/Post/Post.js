@@ -34,6 +34,21 @@ function Post({
 			dispatch(downvote(post.id));
 	};
 
+	let content;
+
+	switch (post.type) {
+		case 'text':
+			content = <div>{post.text}</div>;
+			break;
+
+		case 'image':
+			content = <img src={post.url} alt='' />;
+			break;
+
+		default:
+			content = <div className='error-message'>Failed to parse content</div>;
+	}
+
 	return (
 		<div className='Post'>
 			<div className='Post__HorizontalGrid'>
@@ -44,7 +59,7 @@ function Post({
 				/>
 				<div className='Post__Main'>
 					<div className='Post__Title'>{post.title}</div>
-					{post.content}
+					{content}
 					<div className='Post__Footer'>
 						<span className='Post__Author'>{post.author}</span>
 						<span className='Post__Age'>{moment.unix(post.created).fromNow()}</span>

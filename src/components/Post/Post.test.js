@@ -8,7 +8,7 @@ import { loadComments } from '../../store/commentsSlice';
 import { upvote, downvote, cancelUpvote, cancelDownvote, setSelectedPost } from '../../store/postsSlice';
 
 describe('Post', () => {
-	describe('non-upvoted and non-downvoted post', () => {
+	describe('non-upvoted and non-downvoted text post', () => {
 		let post, wrapper, mockStore, store;
 
 		beforeEach(() => {
@@ -17,7 +17,8 @@ describe('Post', () => {
 			post = {
 				id: 'id',
 				title: 'Title',
-				content: 'Content',
+				type: 'text',
+				text: 'my text',
 				author: 'Author',
 				created: new Date(),
 				numComments: 256,
@@ -47,8 +48,8 @@ describe('Post', () => {
 			expect(wrapper.text().includes(post.title)).toBe(true);
 		});
 
-		it('renders the content', () => {
-			expect(wrapper.text().includes(post.content)).toBe(true);
+		it('renders text content', () => {
+			expect(wrapper.text().includes(post.text)).toBe(true);
 		});
 
 		it('renders the author', () => {
@@ -105,7 +106,8 @@ describe('Post', () => {
 			post = {
 				id: 'id',
 				title: 'Title',
-				content: 'Content',
+				type: 'text',
+				text: 'my text',
 				author: 'Author',
 				created: new Date(),
 				numComments: 256,
@@ -147,7 +149,8 @@ describe('Post', () => {
 			post = {
 				id: 'id',
 				title: 'Title',
-				content: 'Content',
+				type: 'text',
+				text: 'my text',
 				author: 'Author',
 				created: new Date(),
 				numComments: 256,
@@ -177,6 +180,47 @@ describe('Post', () => {
 			wrapper.find('.Upvotes__DownvoteButton').simulate('click');
 			expect(store.dispatch).toHaveBeenCalledTimes(1);
 			expect(store.dispatch).toHaveBeenCalledWith(cancelDownvote(post.id));
+		});
+	});
+
+	describe('image post', () => {
+		let post, wrapper, mockStore, store;
+
+		beforeEach(() => {
+			mockStore = configureStore([]);
+
+			post = {
+				id: 'id',
+				title: 'Title',
+				type: 'image',
+				url: 'myurl',
+				author: 'Author',
+				created: new Date(),
+				numComments: 256,
+				upvotes: 100,
+				userUpvoted: false,
+				userDownvoted: true,
+			};
+
+			store = mockStore({
+				posts: [post]
+			});
+
+			store.dispatch = jest.fn();
+
+			wrapper = mount(
+				<Provider store={store}>
+					<Post post={post} />
+				</Provider>
+			);
+		});
+
+		afterEach(() => {
+			wrapper.unmount();
+		});
+
+		it('renders the image', () => {
+			expect(wrapper.containsMatchingElement(<img src={post.url} alt='' />)).toBe(true);
 		});
 	});
 });

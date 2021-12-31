@@ -43,7 +43,9 @@ const reddit = {
 		return posts.map(child => ({
 			id: child.data.id,
 			title: child.data.title,
-			content: '',
+			type: child.data.post_hint === 'image' ? 'image' : 'text',
+			text: child.data.selftext,
+			url: child.data.url,
 			author: child.data.author,
 			created: child.data.created_utc,
 			numComments: child.data.num_comments,

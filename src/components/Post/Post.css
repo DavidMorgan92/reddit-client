@@ -6,6 +6,10 @@
 	text-align: initial;
 }
 
+.Post img {
+	max-width: 100%;
+}
+
 .Post__HorizontalGrid {
 	display: grid;
 	grid-template-columns: 10% 90%;
