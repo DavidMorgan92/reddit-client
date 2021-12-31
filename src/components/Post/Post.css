@@ -6,13 +6,14 @@
 	text-align: initial;
 }
 
-.Post__HorizontalFlex {
-	display: flex;
+.Post__HorizontalGrid {
+	display: grid;
+	grid-template-columns: 10% 90%;
+	column-gap: 10px;
 }
 
 .Post__Main {
-	width: 100%;
-	margin-left: 10px;
+	margin-right: 10px;
 }
 
 .Post__Title {
@@ -21,6 +22,16 @@
 }
 
 .Post__Footer {
-	display: flex;
-	justify-content: space-between;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	column-gap: 5px;
+	font-size: small;
+}
+
+.Post__Age {
+	text-align: center;
+}
+
+.Post__CommentsButton {
+	justify-self: flex-end;
 }

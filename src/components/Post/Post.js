@@ -35,7 +35,7 @@ function Post({
 
 	return (
 		<div className='Post'>
-			<div className='Post__HorizontalFlex'>
+			<div className='Post__HorizontalGrid'>
 				<Upvotes
 					post={post}
 					onUpvoteClick={handleUpvoteClick}
@@ -45,8 +45,8 @@ function Post({
 					<div className='Post__Title'>{post.title}</div>
 					{post.content}
 					<div className='Post__Footer'>
-						<span>{post.author}</span>
-						<span>{moment.unix(post.created).fromNow()}</span>
+						<span className='Post__Author'>{post.author}</span>
+						<span className='Post__Age'>{moment.unix(post.created).fromNow()}</span>
 						<button
 							className='Post__CommentsButton'
 							onClick={handleCommentsClick}
