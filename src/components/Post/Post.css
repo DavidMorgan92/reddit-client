@@ -14,6 +14,9 @@
 
 .Post__Main {
 	margin-right: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .Post__Title {
@@ -36,4 +39,15 @@
 
 .Post__CommentsButton {
 	justify-self: flex-end;
+	border: none;
+	background: none;
+	cursor: pointer;
+	color: #3d405b;
+	font-weight: bold;
+	font-style: italic;
+	font-size: small;
+}
+
+.Post__CommentsIcon {
+	margin-right: 5px;
 }

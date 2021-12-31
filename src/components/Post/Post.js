@@ -52,7 +52,7 @@ function Post({
 							className='Post__CommentsButton'
 							onClick={handleCommentsClick}
 						>
-							<FontAwesomeIcon icon={faComments} />
+							<FontAwesomeIcon className='Post__CommentsIcon' icon={faComments} />
 							{shortenNumber(post.numComments, 1)}
 						</button>
 					</div>
