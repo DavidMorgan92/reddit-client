@@ -3,3 +3,18 @@
 	flex-direction: column;
 	align-items: center;
 }
+
+.Upvotes button {
+	border: none;
+	background: none;
+	font-size: larger;
+	cursor: pointer;
+}
+
+.Upvotes__UpvoteButton.active {
+	color: red;
+}
+
+.Upvotes__DownvoteButton.active {
+	color: blue;
+}
