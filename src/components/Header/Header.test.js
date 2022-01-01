@@ -15,7 +15,7 @@ describe('Header', () => {
 	});
 
 	it('renders the heading', () => {
-		expect(wrapper.containsMatchingElement(<h1>Reddit Client</h1>)).toBe(true);
+		expect(wrapper.containsMatchingElement(<h1><a href='/'>Reddit Client</a></h1>)).toBe(true);
 	});
 
 	it('renders a <Search />', () => {
