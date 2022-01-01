@@ -4,7 +4,7 @@
 	padding: 10px;
 	border-radius: 5px;
 	text-align: initial;
-	word-break: break-all;
+	word-break: break-word;
 }
 
 .Comment__Footer {
