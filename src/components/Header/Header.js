@@ -6,7 +6,7 @@ function Header() {
 	return (
 		<header>
 			<img src={'/reddit-168.svg'} alt='Logo' />
-			<h1>Reddit Client</h1>
+			<h1><a href='/'>Reddit Client</a></h1>
 			<Search />
 		</header>
 	);

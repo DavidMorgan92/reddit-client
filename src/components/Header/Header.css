@@ -14,3 +14,8 @@ header img {
 header h1 {
 	margin: 0 auto 0 10px;
 }
+
+header a, header a:active, header a:visited, header a:hover {
+	text-decoration: none;
+	color: inherit;
+}
