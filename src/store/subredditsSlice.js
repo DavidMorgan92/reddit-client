@@ -3,6 +3,7 @@ import reddit from '../api/reddit';
 
 const initialState = {
 	subreddits: [],
+	subredditsListOpen: false,
 	selectedSubreddit: null,
 	isLoadingSubreddits: false,
 	failedToLoadSubreddits: false,
@@ -22,6 +23,9 @@ const subredditsSlice = createSlice({
 		setSelectedSubreddit(state, action) {
 			const selectedSubreddit = state.subreddits.find(s => s.id === action.payload);
 			state.selectedSubreddit = selectedSubreddit;
+		},
+		setSubredditsListOpen(state, action) {
+			state.subredditsListOpen = action.payload;
 		},
 	},
 	extraReducers: {
@@ -43,9 +47,10 @@ const subredditsSlice = createSlice({
 
 export const selectSubreddits = state => state.subreddits.subreddits;
 export const selectSelectedSubreddit = state => state.subreddits.selectedSubreddit;
+export const selectSubredditsListOpen = state => state.subreddits.subredditsListOpen;
 export const selectIsLoadingSubreddits = state => state.subreddits.isLoadingSubreddits;
 export const selectFailedToLoadSubreddits = state => state.subreddits.failedToLoadSubreddits;
 
-export const { setSelectedSubreddit } = subredditsSlice.actions;
+export const { setSelectedSubreddit, setSubredditsListOpen } = subredditsSlice.actions;
 
 export default subredditsSlice.reducer;

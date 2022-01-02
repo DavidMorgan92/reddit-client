@@ -2,4 +2,12 @@
 	display: flex;
 	padding: 0 20px;
 	align-items: flex-start;
+	column-gap: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+	.App__Main {
+		flex-direction: column-reverse;
+		align-items: stretch;
+	}
 }
