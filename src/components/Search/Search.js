@@ -1,5 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './Search.css';
 import { setSearchTerm, selectSearchTerm } from '../../store/searchSlice';
 import { loadPosts } from '../../store/postsSlice';
@@ -20,8 +22,10 @@ function Search() {
 
 	return (
 		<div className='Search'>
-			<input type='search' value={term} onChange={handleTermChange} />
-			<button onClick={handleSearchClick}>Search</button>
+			<input type='search' value={term} onChange={handleTermChange} placeholder='Search' />
+			<button onClick={handleSearchClick}>
+				<FontAwesomeIcon icon={faSearch} />
+			</button>
 		</div>
 	);
 }
