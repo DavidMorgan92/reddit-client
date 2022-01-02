@@ -4,6 +4,7 @@
 	margin: 20px 0;
 	border-radius: 10px;
 	text-align: initial;
+	word-break: break-word;
 }
 
 .Post img {
