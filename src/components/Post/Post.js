@@ -18,8 +18,12 @@ function Post({
 	const selectedPost = useSelector(selectSelectedPost);
 
 	const handleCommentsClick = () => {
-		dispatch(setSelectedPost(post.id));
-		dispatch(loadComments(post.id));
+		if (selectedPost?.id === post.id) {
+			dispatch(setSelectedPost(null));
+		} else {
+			dispatch(setSelectedPost(post.id));
+			dispatch(loadComments(post.id));
+		}
 	};
 
 	const handleUpvoteClick = () => {

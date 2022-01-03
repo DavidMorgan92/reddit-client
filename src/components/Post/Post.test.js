@@ -4,11 +4,12 @@ import configureStore from 'redux-mock-store';
 import { mount } from 'enzyme';
 import moment from 'moment';
 import Post from './Post';
+import CommentList from '../CommentList/CommentList';
 import { loadComments } from '../../store/commentsSlice';
 import { upvote, downvote, cancelUpvote, cancelDownvote, setSelectedPost } from '../../store/postsSlice';
 
 describe('Post', () => {
-	describe('non-upvoted and non-downvoted text post', () => {
+	describe('non-upvoted and non-downvoted, non-selected, text post', () => {
 		let post, wrapper, mockStore, store;
 
 		beforeEach(() => {
@@ -28,7 +29,10 @@ describe('Post', () => {
 			};
 
 			store = mockStore({
-				posts: [post]
+				posts: {
+					posts: [post],
+					selectedPost: null,
+				},
 			});
 
 			store.dispatch = jest.fn();
@@ -72,6 +76,10 @@ describe('Post', () => {
 			expect(wrapper.exists('Upvotes')).toBe(true);
 		});
 
+		it('doesn\'t render a <CommentList />', () => {
+			expect(wrapper.containsMatchingElement(<CommentList />)).toBe(false);
+		});
+
 		it('dispatches setSelectedPost with post ID when comments button is clicked', () => {
 			wrapper.find('.Post__CommentsButton').simulate('click');
 			expect(store.dispatch).toHaveBeenCalledTimes(2);
@@ -97,6 +105,59 @@ describe('Post', () => {
 		});
 	});
 
+	describe('selected post', () => {
+		let post, wrapper, mockStore, store;
+
+		beforeEach(() => {
+			mockStore = configureStore([]);
+
+			post = {
+				id: 'id',
+				title: 'Title',
+				type: 'text',
+				text: 'my text',
+				author: 'Author',
+				created: new Date(),
+				numComments: 256,
+				upvotes: 100,
+				userUpvoted: false,
+				userDownvoted: false,
+			};
+
+			store = mockStore({
+				posts: {
+					posts: [post],
+					selectedPost: post,
+				},
+				comments: {
+					comments: [],
+				},
+			});
+
+			store.dispatch = jest.fn();
+
+			wrapper = mount(
+				<Provider store={store}>
+					<Post post={post} />
+				</Provider>
+			);
+		});
+
+		afterEach(() => {
+			wrapper.unmount();
+		});
+
+		it('renders a <CommentList />', () => {
+			expect(wrapper.containsMatchingElement(<CommentList />)).toBe(true);
+		});
+
+		it('dispatches setSelectedPost with null when comments button is clicked', () => {
+			wrapper.find('.Post__CommentsButton').simulate('click');
+			expect(store.dispatch).toHaveBeenCalledTimes(1);
+			expect(store.dispatch).toHaveBeenCalledWith(setSelectedPost(null));
+		});
+	});
+
 	describe('upvoted post', () => {
 		let post, wrapper, mockStore, store;
 
@@ -117,7 +178,10 @@ describe('Post', () => {
 			};
 
 			store = mockStore({
-				posts: [post]
+				posts: {
+					posts: [post],
+					selectedPost: null,
+				},
 			});
 
 			store.dispatch = jest.fn();
@@ -160,7 +224,10 @@ describe('Post', () => {
 			};
 
 			store = mockStore({
-				posts: [post]
+				posts: {
+					posts: [post],
+					selectedPost: null,
+				},
 			});
 
 			store.dispatch = jest.fn();
@@ -203,7 +270,10 @@ describe('Post', () => {
 			};
 
 			store = mockStore({
-				posts: [post]
+				posts: {
+					posts: [post],
+					selectedPost: null,
+				},
 			});
 
 			store.dispatch = jest.fn();
