@@ -1,10 +1,16 @@
 header {
 	background-color: #f4f1de;
+	box-shadow: 0 0 10px 0px black;
+}
+
+header > div {
 	display: flex;
 	align-items: center;
-	box-shadow: 0 0 10px 0px black;
 	justify-content: space-between;
 	padding: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 1024px;
 }
 
 header img {
