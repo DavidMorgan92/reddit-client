@@ -8,7 +8,11 @@ function Footer() {
 		<footer>
 			<div>
 				<small>
-					Reddit icon provided by&nbsp;
+					<a href='https://iconscout.com/icon/social-304' target='_blank' rel='noopener noreferrer'>
+						Reddit icon&nbsp;
+						<sup><FontAwesomeIcon icon={faExternalLinkAlt} /></sup>
+					</a>
+					&nbsp;provided by&nbsp;
 					<a href='https://iconscout.com/contributors/pocike' target='_blank' rel='noopener noreferrer'>
 						"Those Icons"&nbsp;
 						<sup><FontAwesomeIcon icon={faExternalLinkAlt} /></sup>
