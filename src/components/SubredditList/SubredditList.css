@@ -2,7 +2,7 @@
 	background-color: #f4f1de;
 	padding: 10px;
 	border-radius: 10px;
-	margin: 20px 0;
+	margin-bottom: 20px;
 }
 
 .SubredditList__Spinner {
@@ -13,7 +13,6 @@
 
 .SubredditList__Opener {
 	margin-left: 10px;
-	margin-bottom: 10px;
 	cursor: pointer;
 }
 
@@ -24,4 +23,10 @@
 .SubredditList__Opener h3 {
 	display: inline;
 	margin-left: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+	.SubredditList__Container {
+		margin-top: 10px;
+	}
 }

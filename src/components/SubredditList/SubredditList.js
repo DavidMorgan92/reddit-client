@@ -42,14 +42,20 @@ function SubredditList() {
 			if (failedToLoadSubreddits) {
 				children = <div className='error-message'>Error occurred getting subreddits</div>;
 			} else {
-				children = subreddits.map(subreddit => (
-					<Subreddit
-						key={subreddit.id}
-						subreddit={subreddit}
-						onClick={handleSubredditClick}
-						isSelected={selectedSubreddit?.id === subreddit.id}
-					/>
-				));
+				children = (
+					<div className='SubredditList__Container'>
+						{
+							subreddits.map(subreddit => (
+								<Subreddit
+									key={subreddit.id}
+									subreddit={subreddit}
+									onClick={handleSubredditClick}
+									isSelected={selectedSubreddit?.id === subreddit.id}
+								/>
+							))
+						}
+					</div>
+				);
 			}
 		}
 	}
