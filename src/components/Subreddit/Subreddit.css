@@ -9,10 +9,12 @@
 
 .Subreddit:hover {
 	background-color: #81b29a;
+	transition: background-color 200ms;
 }
 
 .Subreddit.selected {
 	border-left: solid 3px #3d405b;
+	transition: border-left 200ms;
 }
 
 .Subreddit img {
