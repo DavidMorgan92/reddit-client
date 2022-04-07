@@ -23,7 +23,7 @@ function Search() {
 	return (
 		<div className='Search'>
 			<input type='search' value={term} onChange={handleTermChange} placeholder='Search' />
-			<button onClick={handleSearchClick}>
+			<button onClick={handleSearchClick} aria-label='Search'>
 				<FontAwesomeIcon icon={faSearch} />
 			</button>
 		</div>

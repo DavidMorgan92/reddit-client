@@ -29,6 +29,7 @@ function Upvotes({
 			<button
 				onClick={onUpvoteClick}
 				className={upvoteClassName}
+				aria-label='Upvote'
 			>
 				<FontAwesomeIcon icon={faArrowUp} />
 			</button>
@@ -36,6 +37,7 @@ function Upvotes({
 			<button
 				onClick={onDownvoteClick}
 				className={downvoteClassName}
+				aria-label='Downvote'
 			>
 				<FontAwesomeIcon icon={faArrowDown} />
 			</button>
