@@ -1,5 +1,6 @@
 .CommentList {
 	text-align: center;
+	transform-origin: top;
 }
 
 .CommentList__Spinner {

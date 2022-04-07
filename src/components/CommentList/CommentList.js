@@ -4,29 +4,54 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import './CommentList.css';
 import Comment from '../Comment/Comment';
-import { selectComments, selectFailedToLoadComments, selectIsLoadingComments } from '../../store/commentsSlice';
+import {
+	selectComments,
+	selectFailedToLoadComments,
+	selectIsLoadingComments,
+} from '../../store/commentsSlice';
+import { useSpring, animated } from 'react-spring';
 
 function CommentList() {
 	const comments = useSelector(selectComments);
 	const isLoadingComments = useSelector(selectIsLoadingComments);
 	const failedToLoadComments = useSelector(selectFailedToLoadComments);
 
-	let children = <FontAwesomeIcon className='CommentList__Spinner' icon={faSpinner} spin />;
+	let staticDiv = (
+		<div className='CommentList'>
+			<FontAwesomeIcon className='CommentList__Spinner' icon={faSpinner} spin />
+		</div>
+	);
+
+	let spring = false;
+	let commentsList = null;
 
 	if (!isLoadingComments) {
+		spring = true;
+
 		if (failedToLoadComments) {
-			children = <div className='error-message'>Error occurred getting comments</div>;
+			staticDiv = (
+				<div className='CommentList'>
+					<div className='error-message'>Error occurred getting comments</div>
+				</div>
+			);
 		} else {
-			children = comments.map(comment => (
+			staticDiv = null;
+			commentsList = comments.map(comment => (
 				<Comment key={comment.id} comment={comment} />
 			));
 		}
 	}
 
+	const styles = useSpring({ transform: spring ? 'scaleY(1)' : 'scaleY(0)' });
+
+	const animatedDiv = (
+		<animated.div style={styles} className='CommentList'>
+			{commentsList}
+		</animated.div>
+	);
+
 	return (
-		<div className='CommentList'>
-			{children}
-		</div>
+		staticDiv || animatedDiv
 	);
 }
 
