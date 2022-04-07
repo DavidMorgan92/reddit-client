@@ -15,8 +15,10 @@
 
 .Upvotes__UpvoteButton.active {
 	color: red;
+	transition: color 200ms;
 }
 
 .Upvotes__DownvoteButton.active {
 	color: blue;
+	transition: color 200ms;
 }
