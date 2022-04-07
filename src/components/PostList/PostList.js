@@ -5,6 +5,7 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import './PostList.css';
 import Post from '../Post/Post';
 import { loadPosts, selectFailedToLoadPosts, selectIsLoadingPosts, selectPosts } from '../../store/postsSlice';
+import { useSpring, animated } from 'react-spring';
 
 function PostList() {
 	const dispatch = useDispatch();
@@ -16,22 +17,42 @@ function PostList() {
 		dispatch(loadPosts({subredditName: null, searchTerm: null}));
 	}, [dispatch]);
 
-	let children = <FontAwesomeIcon className='PostList__Spinner' icon={faSpinner} spin />;
+	let staticDiv = (
+		<div className='PostList'>
+			<FontAwesomeIcon className='PostList__Spinner' icon={faSpinner} spin />
+		</div>
+	);
+
+	let spring = false;
+	let postList = null;
 
 	if (!isLoadingPosts) {
+		spring = true;
+
 		if (failedToLoadPosts) {
-			children = <div className='error-message'>Error occurred getting posts</div>;
+			staticDiv = (
+				<div className='PostList'>
+					<div className='error-message'>Error occurred getting posts</div>
+				</div>
+			);
 		} else {
-			children = posts.map(post => (
+			staticDiv = null;
+			postList = posts.map(post => (
 				<Post key={post.id} post={post} />
 			));
 		}
 	}
 
+	const styles = useSpring({ opacity: spring ? 1 : 0 });
+
+	const animatedDiv = (
+		<animated.div style={styles} className='PostList'>
+			{postList}
+		</animated.div>
+	);
+
 	return (
-		<div className='PostList'>
-			{children}
-		</div>
+		staticDiv || animatedDiv
 	);
 }
 
